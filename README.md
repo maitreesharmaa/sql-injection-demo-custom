@@ -16,6 +16,9 @@ I modified the frontend and backend for learning purposes, including custom user
 ## 📝 License
 
 This project remains under the MIT License, as per the original repository.
+---
+
+## 📸 Screenshots
 
 🔐 Login Page (Custom UI)
 ![Login Page](screenshot1.png)
