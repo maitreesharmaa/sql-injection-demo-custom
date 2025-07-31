@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Secure Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #4c3575; 
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+            width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: white;
+            font-size: 26px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #00d1ff;
+            color: black;
+            padding: 14px 0;
+            width: 100%;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #00b8e0;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Welcome</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button type="submit">Login</button>
+    </form>
+    <div id="response"></div>
+</div>
+
+<script>
+    const form = document.getElementById('loginForm');
+    const responseBox = document.getElementById('response');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        fetch(`/api/login?name=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`)
+    .then(res => res.text())
+    .then(data => {
+        responseBox.textContent = data;
+        responseBox.style.color = data.includes("Welcome") ? "lightgreen" : "red";
+    })
+    .catch(err => {
+        responseBox.textContent = "Error occurred.";
+        responseBox.style.color = "red";
+    });
+    });
+</script>
+
+</body>
+</html>
